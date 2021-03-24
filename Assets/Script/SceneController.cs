@@ -24,7 +24,7 @@ public class SceneController : MonoBehaviour
     {
         Vector3 startingPosition = originalCard.transform.position;
 
-        int[] numbers = { 0,0,1,1,2,2,3,3,4,4};
+        int[] numbers = { 0,0,1,1,2,2,3,3};
         numbers = suffleArray(numbers);
 
         for(int i =0; i < gridCols; i++) {
@@ -38,7 +38,7 @@ public class SceneController : MonoBehaviour
 
                 int index = j * gridCols + i;
                 int id = numbers[index];
-                originalCard.setCard(id, sprites[id]);
+                card.setCard(id, sprites[id]);
 
                 float posX = (offsetX * i) + startingPosition.x;
                 float posY = -(offsetY * j) + startingPosition.y;
