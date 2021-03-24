@@ -13,6 +13,7 @@ public class SceneController : MonoBehaviour
 
     [SerializeField] private MemoryCard originalCard;
     [SerializeField] private Sprite[] sprites;
+    [SerializeField] private TextMesh scoreLabel;
 
     private MemoryCard _firstRevealed;
     private MemoryCard _secondRevealed;
@@ -63,7 +64,7 @@ public class SceneController : MonoBehaviour
     private IEnumerator checkMatch() {
         if(_firstRevealed.id == _secondRevealed.id) {
             _score++;
-            Debug.Log("Score: " + _score);
+            scoreLabel.text = "Score: " + _score;
         } else {
             yield return new WaitForSeconds(.5f);
             _firstRevealed.unReveal();
