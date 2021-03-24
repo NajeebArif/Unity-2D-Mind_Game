@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class SceneController : MonoBehaviour
 {
@@ -60,6 +61,11 @@ public class SceneController : MonoBehaviour
             _secondRevealed = card;
             StartCoroutine(checkMatch());
         }
+    }
+
+    public void Restart() {
+        Debug.Log("Restart is called from reflective access in .Net");
+        SceneManager.LoadScene("Scene");
     }
     private IEnumerator checkMatch() {
         if(_firstRevealed.id == _secondRevealed.id) {
