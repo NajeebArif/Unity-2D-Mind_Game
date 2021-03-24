@@ -13,6 +13,12 @@ public class SceneController : MonoBehaviour
 
     [SerializeField] private MemoryCard originalCard;
     [SerializeField] private Sprite[] sprites;
+
+    private MemoryCard _firstRevealed;
+    private MemoryCard _secondRevealed;
+    private int _score;
+
+
     // Start is called before the first frame update
     void Start()
     {
@@ -42,10 +48,29 @@ public class SceneController : MonoBehaviour
 
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
+    public bool canReveal {
+        get { return _secondRevealed == null; }
+    }
+
+    public void cardRevealed(MemoryCard card) {
+        if (_firstRevealed == null) {
+            _firstRevealed = card;
+        } else {
+            _secondRevealed = card;
+            StartCoroutine(checkMatch());
+        }
+    }
+    private IEnumerator checkMatch() {
+        if(_firstRevealed.id == _secondRevealed.id) {
+            _score++;
+            Debug.Log("Score: " + _score);
+        } else {
+            yield return new WaitForSeconds(.5f);
+            _firstRevealed.unReveal();
+            _secondRevealed.unReveal();
+        }
+        _firstRevealed = null;
+        _secondRevealed = null;
     }
 
     private int[] suffleArray(int[] numbers) {
